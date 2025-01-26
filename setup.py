@@ -24,7 +24,7 @@ setup(
     long_description_content_type='text/x-rst',
     author="Cisco Systems",
     author_email='ucs-python@cisco.com',
-    url='https://github.com/ciscoucs/imcsdk',
+    url='https://github.com/adamgreenhalgh/imcsdk',
     packages=[
         'imcsdk',
     ],
