@@ -7,7 +7,7 @@ The new CIMC version 3.0 needs:
 -  Python2 version >= 2.7.9  or  Python3 version >= 3.2
 -  OpenSSL version >= 1.0.1
 
-https://github.com/CiscoUcs/imcsdk/blob/master/docs/imcsdk_ug.rst#getting-started
+https://github.com/adamgreenhalgh/imcsdk/blob/master/docs/imcsdk_ug.rst#getting-started
 
 RHEL ships with Python 2.7.5 as the system Python version:
 
@@ -44,7 +44,7 @@ The container must have the following packages needed for CIMC 3.0:
 -  ``Python 2.7.13`` (Python >= 2.7.9 is needed for CIMC 3.0)
 -  ``pip`` with Python 2.7.13
 -  ``OpenSSL 1.0.1``
--  Cisco's Python ``imcsdk`` library (https://github.com/CiscoUcs/imcsdk)
+-  Cisco's Python ``imcsdk`` library (https://github.com/adamgreenhalgh/imcsdk)
 -  DMTF's Python ``RedFish`` library (``python-redfish-library`` in https://github.com/DMTF/python-redfish-library)
 -  ``epel-release`` and latest ``Ansible`` (if the user wants to automate anything with CIMC 3.0)
 -  Python ``requests`` library needed to interact with RedFish URIs ``/redfish/v1/*``

@@ -34,7 +34,7 @@ Installs the latest top of the tree development version
         wget https://bootstrap.pypa.io/get-pip.py
         python get-pip.py
 
-        git clone https://github.com/ciscoucs/imcsdk.git
+        git clone https://github.com/adamgreenhalgh/imcsdk.git
         cd imcsdk
         make install
 

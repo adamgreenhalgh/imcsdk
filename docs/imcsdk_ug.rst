@@ -220,7 +220,7 @@ Installation Steps
 
 ::
 
-    git clone https://github.com/CiscoUcs/imcsdk/
+    git clone https://github.com/adamgreenhalgh/imcsdk/
     cd imcsdk
     sudo make install
 
