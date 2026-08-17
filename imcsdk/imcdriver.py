@@ -130,6 +130,18 @@ class TLSConnection(httplib.HTTPSConnection):
             # against the server's actual capabilities. Explicitly floor
             # at TLS 1.2 rather than relying on the platform default.
             ssl_context.minimum_version = ssl.TLSVersion.TLSv1_2
+            # Embedded BMC/CIMC TLS stacks often only offer cipher
+            # suites or key/signature strengths that OpenSSL's default
+            # security level (2) now rejects outright with a handshake
+            # failure. This is a private management interface, not a
+            # public endpoint, so relax to SECLEVEL 1 for compatibility.
+            try:
+                ssl_context.set_ciphers('DEFAULT@SECLEVEL=1')
+            except ssl.SSLError:
+                pass
+            log.debug('imcdriver TLS: openssl=%s ciphers=%s',
+                     ssl.OPENSSL_VERSION,
+                     [c['name'] for c in ssl_context.get_ciphers()])
             #Since python 3.6 key_file and cert_file was deprecated
             #latest one for create ssl context is create_default_context
             if hasattr(self, 'key_file') and hasattr(self, 'cert_file') and self.key_file and self.cert_file: 
