@@ -30,8 +30,8 @@ from imcsdk.imcexception import ImcOperationError, ImcOperationErrorDetail
 
 log = logging.getLogger('imc')
 
-CIFS_URI_PATTERN = re.compile('^//\d+\.\d+\.\d+\.\d+\/')
-NFS_URI_PATTERN = re.compile('^\d+\.\d+\.\d+\.\d+\:\/')
+CIFS_URI_PATTERN = re.compile(r'^//\d+\.\d+\.\d+\.\d+\/')
+NFS_URI_PATTERN = re.compile(r'^\d+\.\d+\.\d+\.\d+\:\/')
 
 
 def _get_vmedia_mo_dn(handle, server_id=1):

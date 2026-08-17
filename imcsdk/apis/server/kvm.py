@@ -20,8 +20,8 @@ import re
 from imcsdk.mometa.comm.CommKvm import CommKvm
 from imcsdk.apis.admin.ipmi import _get_comm_mo_dn
 
-CIFS_URI_PATTERN = re.compile('^//\d+\.\d+\.\d+\.\d+\/')
-NFS_URI_PATTERN = re.compile('^\d+\.\d+\.\d+\.\d+\:\/')
+CIFS_URI_PATTERN = re.compile(r'^//\d+\.\d+\.\d+\.\d+\/')
+NFS_URI_PATTERN = re.compile(r'^\d+\.\d+\.\d+\.\d+\:\/')
 
 
 def kvm_enable(handle, total_sessions=None, port=None, encryption_state=None,
