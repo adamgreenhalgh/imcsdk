@@ -73,9 +73,15 @@ class TLS1Connection(httplib.HTTPSConnection):
             self.sock = sock
             self._tunnel()
 
-        # This is the only difference; default wrap_socket uses SSLv23
-        self.sock = ssl.wrap_socket(sock, self.key_file, self.cert_file,
-                                    ssl_version=ssl.PROTOCOL_TLSv1)
+        # ssl.wrap_socket() was removed in Python 3.12+; use SSLContext
+        # pinned to TLS 1.0 instead, which is the whole point of this
+        # fallback connection class.
+        ssl_context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
+        ssl_context.minimum_version = ssl.TLSVersion.TLSv1
+        ssl_context.maximum_version = ssl.TLSVersion.TLSv1
+        if getattr(self, 'key_file', None) and getattr(self, 'cert_file', None):
+            ssl_context.load_cert_chain(keyfile=self.key_file, certfile=self.cert_file)
+        self.sock = ssl_context.wrap_socket(sock)
 
 
 class TLSHandler(HTTPSHandler):
@@ -117,6 +123,13 @@ class TLSConnection(httplib.HTTPSConnection):
             ssl_context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
             ssl_context.options |= ssl.OP_NO_SSLv2
             ssl_context.options |= ssl.OP_NO_SSLv3
+            # Some newer Python/OpenSSL builds default PROTOCOL_SSLv23's
+            # negotiated minimum to TLS 1.3, which many CIMC/BMC web
+            # servers (even on recent hardware) don't support, causing a
+            # handshake failure before the connection is even attempted
+            # against the server's actual capabilities. Explicitly floor
+            # at TLS 1.2 rather than relying on the platform default.
+            ssl_context.minimum_version = ssl.TLSVersion.TLSv1_2
             #Since python 3.6 key_file and cert_file was deprecated
             #latest one for create ssl context is create_default_context
             if hasattr(self, 'key_file') and hasattr(self, 'cert_file') and self.key_file and self.cert_file: 
