@@ -48,63 +48,63 @@ class ImcVersion(object):
         self.__patch = None
         self.__spin = None
 
-        match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
-                                   "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
-                                   "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))\."
-                                   "(?P<patch>(([0-9])|([1-9][0-9]{0,4})))\)$")
+        match_pattern = re.compile(r"^(?P<major>[1-9][0-9]{0,2})\."
+                                   r"(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
+                                   r"(?P<mr>(([0-9])|([1-9][0-9]{0,2})))\."
+                                   r"(?P<patch>(([0-9])|([1-9][0-9]{0,4})))\)$")
         match_obj = re.match(match_pattern, version)
         if self._set_versions(match_obj):
             return
 
-        match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
-                                   "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
-                                   "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))"
-                                   "(?P<patch>[a-z])\)$")
+        match_pattern = re.compile(r"^(?P<major>[1-9][0-9]{0,2})\."
+                                   r"(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
+                                   r"(?P<mr>(([0-9])|([1-9][0-9]{0,2})))"
+                                   r"(?P<patch>[a-z])\)$")
         match_obj = re.match(match_pattern, version)
         if self._set_versions(match_obj):
             return
 
-        match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
-                                   "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
-                                   "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))\)$")
+        match_pattern = re.compile(r"^(?P<major>[1-9][0-9]{0,2})\."
+                                   r"(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
+                                   r"(?P<mr>(([0-9])|([1-9][0-9]{0,2})))\)$")
         match_obj = re.match(match_pattern, version)
         if self._set_versions(match_obj):
             return
 
         # handle spin builds "2.0(13aS1))"
-        match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
-                                   "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
-                                   "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))"
-                                   "(?P<patch>[a-z])"
-                                   "(?P<spin>S[1-9][0-9]{0,2})\)$")
+        match_pattern = re.compile(r"^(?P<major>[1-9][0-9]{0,2})\."
+                                   r"(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
+                                   r"(?P<mr>(([0-9])|([1-9][0-9]{0,2})))"
+                                   r"(?P<patch>[a-z])"
+                                   r"(?P<spin>S[1-9][0-9]{0,2})\)$")
         match_obj = re.match(match_pattern, version)
         if self._set_versions(match_obj):
             return
 
         # handle spin builds "3.0(1S10))"
-        match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
-                                   "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
-                                   "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))"
-                                   "(?P<spin>S[1-9][0-9]{0,2})\)$")
+        match_pattern = re.compile(r"^(?P<major>[1-9][0-9]{0,2})\."
+                                   r"(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
+                                   r"(?P<mr>(([0-9])|([1-9][0-9]{0,2})))"
+                                   r"(?P<spin>S[1-9][0-9]{0,2})\)$")
         match_obj = re.match(match_pattern, version)
         if self._set_versions(match_obj):
             return
 
         # handle spin builds "4.2(1.2021052301)"
-        match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
-                                   "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
-                                   "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))\."
-                                   "(?P<spin>\d{0,4}\d{0,2}\d{0,2}\d{0,2})\)$")
+        match_pattern = re.compile(r"^(?P<major>[1-9][0-9]{0,2})\."
+                                   r"(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
+                                   r"(?P<mr>(([0-9])|([1-9][0-9]{0,2})))\."
+                                   r"(?P<spin>\d{0,4}\d{0,2}\d{0,2}\d{0,2})\)$")
         match_obj = re.match(match_pattern, version)
         if self._set_versions(match_obj):
             return
 
         # handle patch spin builds "4.2(1a.2021052301)"
-        match_pattern = re.compile("^(?P<major>[1-9][0-9]{0,2})\."
-                                   "(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
-                                   "(?P<mr>(([0-9])|([1-9][0-9]{0,2})))"
-                                   "(?P<patch>[a-z])\."
-                                   "(?P<spin>\d{0,4}\d{0,2}\d{0,2}\d{0,2})\)$")
+        match_pattern = re.compile(r"^(?P<major>[1-9][0-9]{0,2})\."
+                                   r"(?P<minor>(([0-9])|([1-9][0-9]{0,1})))\("
+                                   r"(?P<mr>(([0-9])|([1-9][0-9]{0,2})))"
+                                   r"(?P<patch>[a-z])\."
+                                   r"(?P<spin>\d{0,4}\d{0,2}\d{0,2}\d{0,2})\)$")
         match_obj = re.match(match_pattern, version)
         if self._set_versions(match_obj):
             return
